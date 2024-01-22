@@ -1,0 +1,8 @@
+trigger: main
+
+staged:
+  - stage: Build
+    jobs:
+      - job: Build
+        pool:
+          vmImage: 'ubuntu-latest'
