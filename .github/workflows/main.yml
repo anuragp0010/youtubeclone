@@ -18,6 +18,7 @@ jobs:
       - run: npm run build --if-present
       - run: |
           zip -r Build.zip . -i build/static/js/*.js
+          zip -r Build.zip . -i build/static/css/*.css
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
