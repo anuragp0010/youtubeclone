@@ -1,7 +1,11 @@
-name: Build Youtube Clone to Azure Web App
+name: Build and download artifact
 on:
   push:
+    branches: pipeline_test
+    paths: 
+      - '**/*.yml'
   workflow_dispatch:
+  
 
 env:
   NODE_VERSION: '18.x' # The NODE version to use
