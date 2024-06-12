@@ -52,5 +52,5 @@ jobs:
           path: release.zip
 
       - name: Extarct artifact
-        run: unzip ./release.zip
+        run: unzip release.zip
       
