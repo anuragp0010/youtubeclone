@@ -49,13 +49,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: release-artifact
-          path: release.zip
+         # path: release.zip
 
       - name: Extarct artifact
-        run: |
-          mkdir ~/artifact
-          unzip release.zip -d ~/artifact
-
+        run: unzip release.zip 
+        #  mkdir ~/artifact
+         
       - name: 'Cleanup build folder'
         run: |
           ls -la ./
