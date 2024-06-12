@@ -29,8 +29,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: Build
-          path: release.zip
+          name: release-artifact
+          path: ./release.zip
      # - run: |
       #    zip -r Build.zip . -i build/static/js/*.js
        #   zip -r Build.zip . -i build/static/css/*.css
@@ -53,10 +53,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: Build
+          name: release-artifact
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip ./release.zip
      # - run: |
       #    unzip Build.zip
        #   rm Build.zip
