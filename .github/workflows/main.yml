@@ -2,6 +2,11 @@ name: Build and Deploy Youtube Clone to Azure Web App
 on:
   workflow_dispatch
 
+env:
+  NODE_VERSION: '18.x' # The NODE version to use
+  WORKING_DIRECTORY: ./src
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,10 +17,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
-      - run: npm ci
-      - run: npx update-browserslist-db@latest
-      - run: npm run build --if-present
+          node-version: ${{ env.DOTNET_VERSION }}
+      - run: |
+            npm ci
+            npx update-browserslist-db@latest
+            npm run build --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
