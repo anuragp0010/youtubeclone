@@ -11,6 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -18,15 +25,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci
-      - run: npx update-browserslist-db@latest
-      - run: npm run build --if-present
+      - run: |
+          npm ci
+          npx update-browserslist-db@latest
+          npm run build --if-present
+          echo "Zipping artifact for release"
+          zip release.zip build -r
 
-      - name: Zip artifact for deployment
-        run: zip release.zip build -r
+#     - name: Zip artifact for deployment
+#      run: zip release.zip build -r
         
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-artifact
           path: release.zip
