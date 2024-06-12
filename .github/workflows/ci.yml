@@ -5,7 +5,7 @@ on:
 
 env:
   NODE_VERSION: '18.x' # The NODE version to use
-  WORKING_DIRECTORY: ./src
+#  WORKING_DIRECTORY: ./src
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: release-artifact
-          path: ${{ env.WORKING_DIRECTORY }}/release.zip
+          path: release.zip
   
   release:
     runs-on: ubuntu-latest
@@ -39,8 +39,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: release-artifact
-          path: ${{ env.WORKING_DIRECTORY }}/release.zip
+          path: release.zip
 
       - name: Extarct artifact
-        run: unzip ./release.zip
+        run: unzip release.zip
       
